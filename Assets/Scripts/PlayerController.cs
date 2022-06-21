@@ -5,26 +5,34 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.InputSystem.Interactions;
 using UnityEngine.UI;
+using Cinemachine;
 
 public class PlayerController : MonoBehaviour
 {
-    private PlayerInputs _input;
-    public Rigidbody rg;
-    public Transform tf;
-    public int addF = 5;
-    public bool _ground;
-    public bool _jump = false;
-    public Vector2 m_Camera = Vector2.zero;
-    public Text tx;
+    [Header("References")]
+    public Text Text;
 
-    public DateTime startTime,endTime;
+    [Header("Configs")]
+    public float JumpForce = 5;
+    public float JumpInputDurationMin = 1;
+    public float JumpInputDurationMax = 3;
+
+    [Header("Data")]
+    public Vector2 CameraInput = Vector2.zero;
+
+    // Components
+    Rigidbody _rigidbody;
+    PlayerInputs _input;
+
+    // Data
+    float _jumpInputTime = 0;
+
+    //public DateTime startTime,endTime;
     // Start is called before the first frame update
     void Start()
     {
         _input = GetComponent<PlayerInputs>();
-        rg = GetComponent<Rigidbody>();
-        tf = GetComponent<Transform>();
-        tx = GetComponent<Text>();
+        _rigidbody = GetComponent<Rigidbody>();
     }
 
     // Update is called once per frame
@@ -36,26 +44,31 @@ public class PlayerController : MonoBehaviour
     
     public void OnJump(InputAction.CallbackContext callbackContext)
     {
-        if(callbackContext.phase is InputActionPhase.Performed)
-            startTime = DateTime.Now;
+        if (callbackContext.phase is InputActionPhase.Performed)
+            _jumpInputTime = Time.time;
+            //startTime = DateTime.Now;
 
         if (callbackContext.phase is InputActionPhase.Canceled)
         {
-            endTime = DateTime.Now;
-            addF = GetSubSeconds(startTime, endTime);
-            addF = addF % 3;
-            tx.text = "Force is " + addF + "now";
-            rg.AddForce(new Vector3(tf.forward.x, 1, 0) * addF * 5, ForceMode.Impulse);
+            //endTime = DateTime.Now;
+            float inputDuration = Mathf.Clamp(Time.time - _jumpInputTime, JumpInputDurationMin, JumpInputDurationMax);
+
+            //JumpForce = GetSubSeconds(startTime, endTime);
+            //JumpForce = JumpForce % 3;
+            Text.text = "Force is " + JumpForce + "now";
+
+            Vector3 direction = (transform.position - Camera.main.transform.position);
+            direction = direction.normalized + Vector3.up;
+            direction = direction.normalized;
+
+            _rigidbody.AddForce(direction * JumpForce * inputDuration, ForceMode.Impulse);
         }
-
-
-           
     }
 
     public void OnLook(InputAction.CallbackContext context)
     {
-        m_Camera = context.ReadValue<Vector2>();
-        tf.Rotate(new Vector3(0, m_Camera.x, 0));
+        CameraInput = context.ReadValue<Vector2>();
+        //transform.Rotate(new Vector3(0, CameraInput.x, 0));
     }
 
 
