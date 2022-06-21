@@ -354,9 +354,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Text: {fileID: 1229947858}
-  JumpForce: 5
+  JumpForce: 10
   JumpInputDurationMin: 1
-  JumpInputDurationMax: 3
+  JumpInputDurationMax: 4
   CameraInput: {x: 0, y: 0}
 --- !u!1 &705507993
 GameObject:
@@ -605,7 +605,7 @@ MonoBehaviour:
   CameraDistance: 10
   CameraCollisionFilter:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 16
   IgnoreTag: 
   CameraRadius: 0.2
   DampingIntoCollision: 0
@@ -702,7 +702,7 @@ GameObject:
   - component: {fileID: 954118080}
   - component: {fileID: 954118079}
   - component: {fileID: 954118078}
-  m_Layer: 0
+  m_Layer: 4
   m_Name: Cube
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1047,7 +1047,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Player: {fileID: 168504008}
-  HorizontalSpeed: 3
+  HorizontalSpeed: 10
   CameraInputLerpSpeed: 1
 --- !u!1 &1910856911
 GameObject:
@@ -1193,7 +1193,7 @@ MonoBehaviour:
     ModeOverride: 0
     LensShift: {x: 0, y: 0}
     GateFit: 2
-    m_SensorSize: {x: 1.7777778, y: 1}
+    m_SensorSize: {x: 2.173173, y: 1}
   m_Transitions:
     m_BlendHint: 0
     m_InheritPosition: 0

@@ -46,16 +46,12 @@ public class PlayerController : MonoBehaviour
     {
         if (callbackContext.phase is InputActionPhase.Performed)
             _jumpInputTime = Time.time;
-            //startTime = DateTime.Now;
 
         if (callbackContext.phase is InputActionPhase.Canceled)
         {
-            //endTime = DateTime.Now;
             float inputDuration = Mathf.Clamp(Time.time - _jumpInputTime, JumpInputDurationMin, JumpInputDurationMax);
-
-            //JumpForce = GetSubSeconds(startTime, endTime);
-            //JumpForce = JumpForce % 3;
-            Text.text = "Force is " + JumpForce + "now";
+            
+            Text.text = "Force is " + inputDuration + " now";
 
             Vector3 direction = (transform.position - Camera.main.transform.position);
             direction = direction.normalized + Vector3.up;
@@ -68,20 +64,19 @@ public class PlayerController : MonoBehaviour
     public void OnLook(InputAction.CallbackContext context)
     {
         CameraInput = context.ReadValue<Vector2>();
-        //transform.Rotate(new Vector3(0, CameraInput.x, 0));
     }
 
 
-    public int GetSubSeconds(DateTime startTimer, DateTime endTimer)
-    {
-        TimeSpan startS = new TimeSpan(startTimer.Ticks);
+    //public int GetSubSeconds(DateTime startTimer, DateTime endTimer)
+    //{
+    //    TimeSpan startS = new TimeSpan(startTimer.Ticks);
 
-        TimeSpan endS = new TimeSpan(endTimer.Ticks);
+    //    TimeSpan endS = new TimeSpan(endTimer.Ticks);
 
-        TimeSpan subT = endS.Subtract(startS).Duration();
+    //    TimeSpan subT = endS.Subtract(startS).Duration();
 
       
-        return (int)subT.TotalSeconds;
-    }
+    //    return (int)subT.TotalSeconds;
+    //}
 
 }
