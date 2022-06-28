@@ -22,18 +22,22 @@ public class PlayerController : MonoBehaviour
 
     [Header("Data")]
     public Vector2 CameraInput = Vector2.zero;
-    
+
+    // Singleton µ¥Àý
+    public static PlayerController Instance;
 
     // Components
     Rigidbody _rigidbody;
-    
 
     // Data
     float _jumpInputTime = 0;
     bool _isJump = false;
 
-    //public DateTime startTime,endTime;
-    // Start is called before the first frame update
+    private void Awake()
+    {
+        if (!Instance) Instance = this;
+    }
+
     void Start()
     {
         _rigidbody = GetComponent<Rigidbody>();

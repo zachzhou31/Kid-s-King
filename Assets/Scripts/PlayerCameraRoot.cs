@@ -4,11 +4,11 @@ using UnityEngine;
 
 public class PlayerCameraRoot : MonoBehaviour
 {
-    public PlayerController Player;
+    //public PlayerController Player;
     public float HorizontalSpeed = 1;
     public float CameraInputLerpSpeed = 1;
     Vector2 lastCameraInput = Vector2.zero;
-    // Start is called before the first frame update
+
     void Start()
     {
         
@@ -18,10 +18,10 @@ public class PlayerCameraRoot : MonoBehaviour
     void Update()
     {
         // Follow
-        transform.position = Player.transform.position;
+        transform.position = PlayerController.Instance.transform.position;
 
         // Aim
-        Vector2 currentCameraInput = Player.CameraInput;
+        Vector2 currentCameraInput = PlayerController.Instance.CameraInput;
         Vector2 cameraInput = Vector2.Lerp(lastCameraInput, currentCameraInput, CameraInputLerpSpeed * Time.deltaTime);
         lastCameraInput = currentCameraInput;
 

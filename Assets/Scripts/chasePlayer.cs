@@ -6,14 +6,14 @@ using Random = UnityEngine.Random;
 
 public class chasePlayer : MonoBehaviour
 {
-    public GameObject Player;
+    //public GameObject Player;
     public float ChaseSpeed = .01f, ShakeTime, ShakeFreequenze;
     public Vector3 ShakeRate = new Vector3(0.1f, 0.1f, 0.1f);
-
-    Vector3 direction;
+    public float ForceScale = 5;
+    //Vector3 direction;
     Rigidbody _rigidbody;
-    bool _shake = false;
-    bool _fire = true;
+    bool _hasShaken = false;
+    //bool _fire = true;
     // Start is called before the first frame update
     void Start()
     {
@@ -24,42 +24,37 @@ public class chasePlayer : MonoBehaviour
     void Update()
     {
 
-        Vector3 _playerPosition = Player.transform.position;
-        Vector3 _mePostion = transform.position;
-        direction = (_playerPosition - _mePostion).normalized;
-        if (!_shake)
-            Shake();
-
-        if (_shake && _fire)
-        {
-           _fire = false;
-            _rigidbody.AddForce(direction * ChaseSpeed, ForceMode.VelocityChange);
-        }
-            
-        
-
     }
 
     void Shake()
     {
+        _hasShaken = true;
         StartCoroutine(Shake_Coroutine());
-        _shake = true;
     }
 
     private IEnumerator Shake_Coroutine()
     {
-        Vector3 _mePosition = transform.position;
-
+        // Shake
         for(float i = 0; i < ShakeTime; i += ShakeFreequenze)
         {
-            transform.position = _mePosition +
+            var force =
                  Vector3.right * Random.Range(-ShakeRate.x, ShakeRate.x) +
                  Vector3.up * Random.Range(-ShakeRate.y, ShakeRate.y) +
                  Vector3.forward * Random.Range(-ShakeRate.z, ShakeRate.z);
+
+            _rigidbody.velocity = force * ForceScale;
             yield return new WaitForSeconds(ShakeFreequenze);
         }
 
-        transform.position = _mePosition;
+        // Fire
+        Vector3 _playerPosition = PlayerController.Instance.transform.position;
+        Vector3 _mePostion = transform.position;
+        var direction = (_playerPosition - _mePostion).normalized;
+        _rigidbody.AddForce(direction * ChaseSpeed, ForceMode.Impulse);
+    }
 
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (!_hasShaken) Shake();
     }
 }
