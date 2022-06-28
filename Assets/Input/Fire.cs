@@ -51,7 +51,7 @@ public partial class @Fire : IInputActionCollection2, IDisposable
                     ""name"": """",
                     ""id"": ""3e915645-5fde-48cf-9852-fc55a805fd2e"",
                     ""path"": ""<Keyboard>/space"",
-                    ""interactions"": ""Hold"",
+                    ""interactions"": ""Hold,Press(pressPoint=0.2)"",
                     ""processors"": """",
                     ""groups"": ""Keyboard&Mouse"",
                     ""action"": ""Jump"",
