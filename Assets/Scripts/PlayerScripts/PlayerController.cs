@@ -18,8 +18,8 @@ public class PlayerController : MonoBehaviour
     public float JumpInputDurationMin = 1;
     public float JumpInputDurationMax = 3;
     public Vector3 SavePointPosition = new Vector3(-11f,0.6f,-11f);
-    
-
+    public Rigidbody _rigidbody;
+    public Vector3 WindSpeed;
     [Header("Data")]
     public Vector2 CameraInput = Vector2.zero;
 
@@ -27,7 +27,7 @@ public class PlayerController : MonoBehaviour
     public static PlayerController Instance;
 
     // Components
-    Rigidbody _rigidbody;
+    
 
     // Data
     float _jumpInputTime = 0;
