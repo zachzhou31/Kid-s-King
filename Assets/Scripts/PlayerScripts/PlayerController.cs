@@ -32,6 +32,7 @@ public class PlayerController : MonoBehaviour
     // Data
     float _jumpInputTime = 0;
     bool _isJump = false;
+    float _waitTime;
 
     private void Awake()
     {
@@ -57,7 +58,7 @@ public class PlayerController : MonoBehaviour
     {
         if (Exposure > 20)
         {
-            transform.position = SavePointPosition;
+            ResetPosition();
             Exposure = 0;
         }
             
@@ -100,6 +101,17 @@ public class PlayerController : MonoBehaviour
         CameraInput = context.ReadValue<Vector2>();
     }
 
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.collider.tag == "Ground")
+            Invoke("ResetPosition", 1f);
+   
+           
+    }
 
+    void ResetPosition()
+    {
+        PlayerController.Instance.transform.position = PlayerController.Instance.SavePointPosition;
+    }
 
 }

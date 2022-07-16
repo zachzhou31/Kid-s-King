@@ -56,5 +56,7 @@ public class chasePlayer : MonoBehaviour
     private void OnCollisionEnter(Collision collision)
     {
         if (!_hasShaken) Shake();
+        if (collision.collider.name == "Player")
+            PlayerController.Instance.Exposure = 21;
     }
 }

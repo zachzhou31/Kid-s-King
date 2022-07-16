@@ -5,8 +5,10 @@ using UnityEngine;
 public class WindZone : MonoBehaviour
 {
     public float WindForce = 0.1f;
+    public float WaitTime;
 
-
+    float _time = 0f;
+    float _saveForce ;
     public Vector3 Velocity
     {
         get
@@ -27,11 +29,14 @@ public class WindZone : MonoBehaviour
     {
        //if(! WindZoneList.Instance.WindZoneLists.Contains(this.GetComponent<WindZone>()))
        //     WindZoneList.Instance.WindZoneLists.Add(this.GetComponent<WindZone>());
-
-        if (!WindZoneList.Instance.WindZoneLists.Contains(this))
+       if(other.name == "Player")
         {
-            WindZoneList.Instance.WindZoneLists.Add(this);
+            if (!WindZoneList.Instance.WindZoneLists.Contains(this))
+            {
+                WindZoneList.Instance.WindZoneLists.Add(this);
+            }
         }
+
 
 
     }
@@ -51,5 +56,20 @@ public class WindZone : MonoBehaviour
         {
             WindZoneList.Instance.WindZoneLists.Remove(this);
         }
+    }
+    private void Start()
+    {
+        _saveForce = WindForce;
+    }
+    private void Update()
+    {
+        _time += Time.deltaTime;
+        if (_time >= WaitTime && _time <= 2*WaitTime)
+            WindForce = 0;
+        else
+            WindForce = _saveForce;
+
+        if (_time > 20f)
+            _time = 0f;
     }
 }
