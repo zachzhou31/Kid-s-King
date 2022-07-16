@@ -70,7 +70,7 @@ public class PlayerController : MonoBehaviour
     {
         if (_isJump)
         {
-            if (callbackContext.phase is InputActionPhase.Performed)
+            if (callbackContext.phase is InputActionPhase.Started)
 
                 _jumpInputTime = Time.time;
 
@@ -82,7 +82,7 @@ public class PlayerController : MonoBehaviour
                 else
                     inputDuration = Mathf.Clamp(Time.time - _jumpInputTime, JumpInputDurationMin, JumpInputDurationMax);
 
-                Text.text = "Force is " + inputDuration + " now";
+                //Text.text = "Force is " + inputDuration + " now";
 
                 Vector3 direction = (transform.position - Camera.main.transform.position);
                 direction = direction.normalized + Vector3.up;
