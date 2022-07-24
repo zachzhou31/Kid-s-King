@@ -27,8 +27,9 @@ public class Rotation : MonoBehaviour
     {
         RaycastHit hitInfo;
 
-        if(Physics.Raycast(transform.position,transform.right,out hitInfo))
+        if(Physics.Raycast(transform.position,transform.right,out hitInfo,10000,6))
         {
+            Debug.Log(hitInfo.collider.name);
             if(hitInfo.collider.name == "Player")
                 Player.GetComponent<PlayerController>().Exposure += 1;
             

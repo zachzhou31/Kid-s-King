@@ -5,6 +5,7 @@ using UnityEngine;
 public class GoAndBack : MonoBehaviour
 {
     public Vector3 StartPoint, EndPoint;
+    public GameObject Teacher;
     public float MoveSpeed;
     public stage1_start StageStartStatus;
 
@@ -20,7 +21,8 @@ public class GoAndBack : MonoBehaviour
     void Update()
     {
         if (StageStartStatus.Stage1Start)
-            DeskBounceMove();
+            if ((Teacher.transform.position.z <= 45.2) && (Teacher.transform.position.x == -52))
+                DeskBounceMove();
     }
 
     void DeskBounceMove()

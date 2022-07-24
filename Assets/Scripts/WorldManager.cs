@@ -5,9 +5,10 @@ using UnityEngine;
 public class WorldManager : MonoBehaviour
 {
     public static WorldManager Instance;
-
+    public float EnterFantasyWorldTime = 10;
     bool m_IsFantsyWorld = false;
 
+    float _stopTimeRecord;
     public bool IsFantasyWorld
     {
         get => m_IsFantsyWorld;
@@ -34,8 +35,11 @@ public class WorldManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.O)) IsFantasyWorld = true;
-        if (Input.GetKeyDown(KeyCode.P)) IsFantasyWorld = false;
+        //if velocity = 0 ³ÖÐø5Ãë IsFantasyWorld = false;
+        if (this.GetComponent<Rigidbody>().velocity.magnitude == 0)
+            _stopTimeRecord = Time.time;
+        IsFantasyWorld = IsThinking();
+
     }
 
     public void Switch()
@@ -48,5 +52,16 @@ public class WorldManager : MonoBehaviour
     public void AddSwitcher(WorldSwitcher sitwhcer)
     {
         m_Switchers.Add(sitwhcer);
+    }
+
+    public bool IsThinking()
+    {
+        if (_stopTimeRecord != 0)
+            if (Time.time - _stopTimeRecord > EnterFantasyWorldTime)
+                return false;
+            else
+                return true;
+        else
+            return true;
     }
 }

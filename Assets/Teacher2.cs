@@ -2,25 +2,25 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BallDetector : MonoBehaviour
+public class Teacher2 : MonoBehaviour
 {
+    public bool TeacherChange2 = false;
     // Start is called before the first frame update
-    public GameObject Ball;
     void Start()
     {
-
+        
     }
 
     // Update is called once per frame
     void Update()
     {
-
+        
     }
 
     private void OnTriggerEnter(Collider other)
     {
         if (other.name == "Player")
-            Ball.GetComponent<chasePlayer>().enabled = true;
+            TeacherChange2 = true;
 
     }
 }

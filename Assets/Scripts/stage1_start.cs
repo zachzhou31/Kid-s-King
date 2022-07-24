@@ -5,6 +5,7 @@ using UnityEngine;
 public class stage1_start : MonoBehaviour
 {
     public bool Stage1Start = false;
+    public GameObject Students;
     // Start is called before the first frame update
     void Start()
     {
@@ -22,6 +23,12 @@ public class stage1_start : MonoBehaviour
         if(other.name == "Player")
         {
             Stage1Start = true;
+            Invoke("StudentShowUp", 5f);
         }
+    }
+
+    private void StudentShowUp()
+    {
+        Students.SetActive(true);
     }
 }

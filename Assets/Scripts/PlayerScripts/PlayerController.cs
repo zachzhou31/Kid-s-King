@@ -31,6 +31,7 @@ public class PlayerController : MonoBehaviour
 
     // Data
     float _jumpInputTime = 0;
+    int _cupCollect = 0;
     bool _isJump = false;
     float _waitTime;
 
@@ -105,6 +106,9 @@ public class PlayerController : MonoBehaviour
     {
         if (collision.collider.tag == "Ground")
             Invoke("ResetPosition", 1f);
+
+        if (collision.collider.tag == "Cup")
+            _cupCollect += 1;
    
            
     }

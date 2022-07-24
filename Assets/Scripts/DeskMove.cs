@@ -26,7 +26,7 @@ public class DeskMove : MonoBehaviour
             
 
         if (StageStartStatus.Stage1Start)
-            if((Teacher.transform.position.z == 55.1) &&(Teacher.transform.position.x >= -35.1))
+            if((Teacher.transform.position.z <= 45.2) &&(Teacher.transform.position.x == -52))
                 DeskBounceMove();
         if ((this.transform.position == FirstPoint) || (this.transform.position == SecondPoint) || (this.transform.position == ThirdPoint) || (this.transform.position == FourthPoint) || (this.transform.position == FifthPoint))
         {

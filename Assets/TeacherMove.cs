@@ -20,6 +20,8 @@ public class TeacherMove : MonoBehaviour
     void Update()
     {
        AutoMove();
+       IsPlayerMove();
+
     }
 
     void AutoMove()
@@ -49,6 +51,15 @@ public class TeacherMove : MonoBehaviour
                 if (this.transform.position == StartPoint)
                     _moveToTrunP = true;
             }      
+        }
+    }
+
+    void IsPlayerMove()
+    {
+        if ((this.transform.position.z == 45.2) && (this.transform.position.x >= -36.1))
+        {
+            if (PlayerController.Instance._rigidbody.velocity.magnitude > 0.15)
+                PlayerController.Instance.Exposure += 1;
         }
     }
 }
