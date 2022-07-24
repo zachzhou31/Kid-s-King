@@ -15,9 +15,13 @@ public class chasePlayer : MonoBehaviour
     bool _hasShaken = false;
     //bool _fire = true;
     // Start is called before the first frame update
-    void Start()
+    private void Awake()
     {
         _rigidbody = GetComponent<Rigidbody>();
+    }
+    void Start()
+    {
+        
     }
 
     // Update is called once per frame

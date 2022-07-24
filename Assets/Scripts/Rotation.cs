@@ -8,6 +8,7 @@ public class Rotation : MonoBehaviour
     public float RotationSpeed = 2.0f;
     public PlayerController Player;
     public float _direction = 1;
+    public LayerMask SightMask;
     // Update is called once per frame
     void Update()
     {
@@ -27,7 +28,7 @@ public class Rotation : MonoBehaviour
     {
         RaycastHit hitInfo;
 
-        if(Physics.Raycast(transform.position,transform.right,out hitInfo,10000,6))
+        if(Physics.Raycast(transform.position,transform.right,out hitInfo,10000, SightMask))
         {
             Debug.Log(hitInfo.collider.name);
             if(hitInfo.collider.name == "Player")

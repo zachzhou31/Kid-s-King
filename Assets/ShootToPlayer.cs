@@ -28,19 +28,19 @@ public class ShootToPlayer : MonoBehaviour
         if(collision.collider.tag == "Player")
         {
             PlayerController.Instance.Exposure += 10;
-            Destroy(this);
+            Destroy(gameObject);
         }
         else if(collision.collider.tag == "Student")
         {
             TeacherStageTwo.StudentList.Remove(collision.collider.gameObject);
             Destroy(collision.collider);
-            Destroy(this);
+            Destroy(gameObject);
             if (TeacherStageTwo.StudentList.Count == 0)
                 TeacherStageTwo.StudentDone();
         }
         else
         {
-            Destroy(this);
+            Destroy(gameObject);
         }
     }
 }
