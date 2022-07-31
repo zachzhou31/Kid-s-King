@@ -28,7 +28,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6075043873486688153}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 19.638592, y: 0.89681625, z: -12.99}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -131,4 +131,5 @@ MonoBehaviour:
   ChaseSpeed: 0
   SpellWaitTime: 0
   BossRound: {fileID: 0}
-  FakeAttack: {fileID: 0}
+  FakeAttack: {fileID: 816534053503189705, guid: 5eeef4f6d7975a64e98d8208cbcb1e67, type: 3}
+  StageTwo: {fileID: 0}

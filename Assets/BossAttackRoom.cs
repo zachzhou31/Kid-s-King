@@ -2,10 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class DestroyAndChange : MonoBehaviour
+public class BossAttackRoom : MonoBehaviour
 {
     // Start is called before the first frame update
-    public GameObject invisibleCup;
     void Start()
     {
         
@@ -17,13 +16,14 @@ public class DestroyAndChange : MonoBehaviour
         
     }
 
-    private void OnCollisionEnter(Collision collision)
+    private void OnTriggerEnter(Collider other)
     {
-        if(collision.collider.name == "Player")
+        if (other.name == "Boss")
         {
-            if(invisibleCup != null)
-                invisibleCup.SetActive(true);
+
+            BossMove.Instance.Health -= 25;
             Destroy(gameObject);
         }
+            
     }
 }

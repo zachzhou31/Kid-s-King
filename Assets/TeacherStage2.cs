@@ -9,7 +9,7 @@ public class TeacherStage2 : MonoBehaviour
     public GameObject BulletPrefab, ShootPosition, StageThreeStart;
     //List of Students, If empty, Teacher gone, Transport to Last Stage.
     public GameObject Student1, Student2, Student3;
-    public float ShootWaitTime;
+    public float ShootWaitTime = 0;
 
 
     public List<GameObject> StudentList = new List<GameObject>();
@@ -27,7 +27,9 @@ public class TeacherStage2 : MonoBehaviour
         if (TeacherTwoStatus.TeacherChange2)
         {
             this.GetComponent<TeacherMove>().enabled = false;
-            Invoke("Shoot",ShootWaitTime);
+            ShootWaitTime += Time.deltaTime;
+            if (ShootWaitTime % 10 == 0)
+                Shoot();
         }
 
         

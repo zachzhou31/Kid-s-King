@@ -10,7 +10,9 @@ using Cinemachine;
 public class PlayerController : MonoBehaviour
 {
     [Header("References")]
-    public Text Text;
+    public Text TextSubtitle;
+
+    public Slider ExposureSlider;
 
     [Header("Configs")]
     public float Exposure = 0;
@@ -20,6 +22,7 @@ public class PlayerController : MonoBehaviour
     public Vector3 SavePointPosition = new Vector3(-11f,0.6f,-11f);
     public Rigidbody _rigidbody;
     public Vector3 WindSpeed;
+    public bool IsJump = false;
     [Header("Data")]
     public Vector2 CameraInput = Vector2.zero;
 
@@ -32,7 +35,7 @@ public class PlayerController : MonoBehaviour
     // Data
     float _jumpInputTime = 0;
     int _cupCollect = 0;
-    bool _isJump = false;
+    
     float _waitTime;
 
     private void Awake()
@@ -50,9 +53,9 @@ public class PlayerController : MonoBehaviour
     {
         TestExposure();
         if (_rigidbody.velocity.magnitude < 0.1)
-            _isJump = true;
+            IsJump = true;
 
-
+        ExposureSlider.value = Exposure;
     }
 
     private void TestExposure()
@@ -69,7 +72,7 @@ public class PlayerController : MonoBehaviour
 
     public void OnJump(InputAction.CallbackContext callbackContext)
     {
-        if (_isJump)
+        if (IsJump)
         {
             if (callbackContext.phase is InputActionPhase.Started)
 
@@ -83,15 +86,15 @@ public class PlayerController : MonoBehaviour
                 else
                     inputDuration = Mathf.Clamp(Time.time - _jumpInputTime, JumpInputDurationMin, JumpInputDurationMax);
 
-                //Text.text = "Force is " + inputDuration + " now";
+                
 
                 Vector3 direction = (transform.position - Camera.main.transform.position);
                 direction = direction.normalized + Vector3.up;
                 direction = direction.normalized;
 
                 _rigidbody.AddForce(direction * JumpForce * inputDuration, ForceMode.Impulse);
-
-                _isJump = false;
+                TextSubtitle.text = "Force is " + inputDuration + " now";
+                IsJump = false;
             }
         }
 

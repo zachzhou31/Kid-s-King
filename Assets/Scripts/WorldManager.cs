@@ -1,13 +1,15 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class WorldManager : MonoBehaviour
 {
     public static WorldManager Instance;
     public float EnterFantasyWorldTime = 10;
     bool m_IsFantsyWorld = false;
-
+    public int CupCollectCount = 0;
+    public Text CupSubtitle;
     float _stopTimeRecord;
     public bool IsFantasyWorld
     {
@@ -40,6 +42,10 @@ public class WorldManager : MonoBehaviour
             _stopTimeRecord = Time.time;
         IsFantasyWorld = IsThinking();
 
+        if (CupCollectCount == 3)
+            Win();
+
+        CupSubtitle.text = "Cups: " + CupCollectCount;
     }
 
     public void Switch()
@@ -63,5 +69,10 @@ public class WorldManager : MonoBehaviour
                 return true;
         else
             return true;
+    }
+
+    public void Win()
+    {
+        Application.Quit();
     }
 }

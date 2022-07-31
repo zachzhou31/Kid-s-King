@@ -26,5 +26,7 @@ public class PlayerCameraRoot : MonoBehaviour
         lastCameraInput = currentCameraInput;
 
         transform.Rotate(Vector3.up * cameraInput.x * Time.deltaTime * HorizontalSpeed);
+
+
     }
 }

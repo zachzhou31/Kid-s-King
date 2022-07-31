@@ -4,16 +4,23 @@ using UnityEngine;
 
 public class BossMove : MonoBehaviour
 {
-    public float Health;
-    public float ChaseSpeed;
-    public float SpellWaitTime;
+    public float Health = 100;
+    public float ChaseSpeed = 5f;
+    public float SpellWaitTime = 10f;
     public GameObject BossRound,FakeAttack,StageTwo;
 
     private bool _attack = false;
+
+    public static BossMove Instance;
     // Start is called before the first frame update
+    private void Awake()
+    {
+        if (!Instance) Instance = this;
+    }
     void Start()
     {
-        
+        //’“µΩBossround
+       // BossRound = FindObjectOfType<GameObject>().name.Equals("BossRound");
         BossRound.SetActive(true);
         
     }
@@ -30,8 +37,9 @@ public class BossMove : MonoBehaviour
 
         if(Health <= 0)
         {
+            WorldManager.Instance.CupCollectCount += 1;
             StageTwo.SetActive(true);
-            Destroy(this);
+            Destroy(gameObject);
             BossRound.SetActive(false);
         }
 

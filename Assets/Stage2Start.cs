@@ -18,7 +18,7 @@ public class Stage2Start : MonoBehaviour
         if (StageTwoStart)
         {
             InvisibleCup.SetActive(true);
-            Destroy(this);
+            Destroy(gameObject);
         }
             
 
