@@ -64,12 +64,13 @@ public class WindZone : MonoBehaviour
     private void Update()
     {
         _time += Time.deltaTime;
-        if (_time >= WaitTime && _time <= 2*WaitTime)
+        if (_time >= WaitTime)
+        {
             WindForce = 0;
+            _time = 0;
+        }
         else
             WindForce = _saveForce;
 
-        if (_time > 20f)
-            _time = 0f;
     }
 }

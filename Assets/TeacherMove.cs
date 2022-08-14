@@ -1,13 +1,15 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class TeacherMove : MonoBehaviour
 {
     // Start is called before the first frame update
     public Vector3 StartPoint, TurnPoint, EndPoint;
     public float _moveDistancePerDelta;
-
+    public Text SubtitleText;
+    public GameObject Dialog;
 
     bool _moveToTrunP = true;
     bool _moveToEndP = false;
@@ -59,7 +61,17 @@ public class TeacherMove : MonoBehaviour
         if ((this.transform.position.z >=14) && (this.transform.position.x >112))
         {
             if (PlayerController.Instance._rigidbody.velocity.magnitude > 0.15)
+            {
                 PlayerController.Instance.Exposure += 1;
+                SubtitleText.text = "老师来了！！别再乱动了！！";
+                Invoke("Disappear", 3f);
+            }
+                
         }
+    }
+
+    void Disappear()
+    {
+        Dialog.SetActive(false);
     }
 }

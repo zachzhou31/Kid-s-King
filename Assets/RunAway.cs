@@ -10,6 +10,7 @@ public class RunAway : MonoBehaviour
     private int _index = 0;
     private Vector3 _nextPosition;
     public Text TextSubtitle;
+    public GameObject DialogPicture;
     void Start()
     {
         
@@ -38,31 +39,42 @@ public class RunAway : MonoBehaviour
 
     public Vector3 nextPosition(int index)
     {
+        DialogPicture.SetActive(true);
         switch (index) {
             case 0:
                 TextSubtitle.text = "不错 现在试着用力弹一下，不过注意别弹太高，落到地上的话……";
+                Invoke("Disappear", 4f);
                 return Point1.transform.position;
             case 1:
-                TextSubtitle.text = "哈哈哈不逗你了啦 现在再碰到我就算你赢喽";
+                TextSubtitle.text = "";
+                Invoke("Disappear", 4f);
                 return Point2.transform.position;
             case 2:
                 TextSubtitle.text = "哎哟 不小心摔了一跤 丢远了 要不再过来一下？";
+                Invoke("Disappear", 4f);
                 return Point3.transform.position;
             case 3:
                 TextSubtitle.text = "事不过三 事不过三";
+                Invoke("Disappear", 4f);
                 return Point4.transform.position;
             case 4:
                 TextSubtitle.text = "这么轻易就让你收集到第一个茶杯了？啧";
+                Invoke("Disappear", 4f);
                 return Point5.transform.position;
             default:
                 TextSubtitle.text = "继续吧 还差俩个就能见到我咯";
+                Invoke("Disappear", 4f);
                 WorldManager.Instance.CupCollectCount += 1;
                 return Vector3.zero;
 
         };
-
+        
     }
 
+    void Disappear()
+    {
+        DialogPicture.SetActive(false);
+    }
     private void CupRun()
     {
         this.transform.position = _nextPosition;

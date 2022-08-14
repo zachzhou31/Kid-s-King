@@ -22,7 +22,7 @@ public class BossShow : MonoBehaviour
         if(collision.collider.name == "Player")
         {
             Instantiate(BossPreFab, this.transform.position, BossPreFab.transform.rotation);
-            Destroy(gameObject);
+            this.gameObject.SetActive(false);
         }
     }
 }

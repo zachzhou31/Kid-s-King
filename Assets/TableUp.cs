@@ -20,6 +20,6 @@ public class TableUp : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         if (Table.transform.localScale.y < 17)
-            Table.transform.localScale = new Vector3(Table.transform.localScale.x, Table.transform.localScale.y + 5, Table.transform.localScale.z);
+            Table.transform.localScale = new Vector3(Table.transform.localScale.x, 10, Table.transform.localScale.z);
     }
 }

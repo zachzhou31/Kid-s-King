@@ -20,7 +20,7 @@ public class BallDetector : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         if (other.name == "Player")
-            Ball.GetComponent<chasePlayer>().enabled = true;
+            Ball.SetActive(true);
 
     }
 }

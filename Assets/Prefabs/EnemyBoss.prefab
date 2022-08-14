@@ -64,7 +64,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 364cb6a686fa0ab4290e6a9451881f31, type: 2}
+  - {fileID: 2100000, guid: e69a4a7fecb018c40806f5581fc49096, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -131,5 +131,5 @@ MonoBehaviour:
   ChaseSpeed: 0
   SpellWaitTime: 0
   BossRound: {fileID: 0}
-  FakeAttack: {fileID: 816534053503189705, guid: 5eeef4f6d7975a64e98d8208cbcb1e67, type: 3}
+  FakeAttack: {fileID: 4788218563271914557, guid: 9986bb2244363e74bb50b4d527eebe15, type: 3}
   StageTwo: {fileID: 0}

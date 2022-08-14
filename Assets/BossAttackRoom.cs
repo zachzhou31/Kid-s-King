@@ -22,7 +22,7 @@ public class BossAttackRoom : MonoBehaviour
         {
 
             BossMove.Instance.Health -= 25;
-            Destroy(gameObject);
+            this.gameObject.SetActive(false);
         }
             
     }

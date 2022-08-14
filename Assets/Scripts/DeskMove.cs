@@ -26,8 +26,17 @@ public class DeskMove : MonoBehaviour
             
 
         if (StageStartStatus.Stage1Start)
-            if((Teacher.transform.position.z <= 45.2) &&(Teacher.transform.position.x == -52))
+        {
+            if ((Teacher.transform.position.z <= 45.2) && (Teacher.transform.position.x == -52))
                 DeskBounceMove();
+            else
+            {
+                if (PlayerController.Instance._rigidbody.velocity.magnitude > 0.3f)
+                    PlayerController.Instance.Exposure += 1 * Time.deltaTime;
+            }
+        }
+            
+            
         if ((this.transform.position == FirstPoint) || (this.transform.position == SecondPoint) || (this.transform.position == ThirdPoint) || (this.transform.position == FourthPoint) || (this.transform.position == FifthPoint))
         {
             MoveStep += 1;

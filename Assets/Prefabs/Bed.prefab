@@ -48,6 +48,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   RealWorldGroup: {fileID: 5377396996166973058}
   FantasyWorldGroup: {fileID: 5378916681921479040}
+  DistanceSwitch: 0
 --- !u!1001 &5378407933657702990
 PrefabInstance:
   m_ObjectHideFlags: 0

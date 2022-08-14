@@ -34,9 +34,6 @@ public class PlayerController : MonoBehaviour
 
     // Data
     float _jumpInputTime = 0;
-    int _cupCollect = 0;
-    
-    float _waitTime;
 
     private void Awake()
     {
@@ -64,6 +61,7 @@ public class PlayerController : MonoBehaviour
         {
             ResetPosition();
             Exposure = 0;
+            _rigidbody.velocity = Vector3.zero;
         }
             
     }
@@ -109,16 +107,15 @@ public class PlayerController : MonoBehaviour
     {
         if (collision.collider.tag == "Ground")
             Invoke("ResetPosition", 1f);
-
-        if (collision.collider.tag == "Cup")
-            _cupCollect += 1;
    
            
     }
 
     void ResetPosition()
     {
+        
         PlayerController.Instance.transform.position = PlayerController.Instance.SavePointPosition;
+        PlayerController.Instance.Exposure = 0;
     }
 
 }

@@ -6,11 +6,12 @@ using UnityEngine.UI;
 public class WorldManager : MonoBehaviour
 {
     public static WorldManager Instance;
+    public GameObject DialogPicture;
     public float EnterFantasyWorldTime = 10;
-    bool m_IsFantsyWorld = false;
+    public bool m_IsFantsyWorld = false;
     public int CupCollectCount = 0;
-    public Text CupSubtitle;
-    float _stopTimeRecord;
+    public Text CupSubtitle,TextSubtitle;
+    float _stopTimeRecord = 0;
     public bool IsFantasyWorld
     {
         get => m_IsFantsyWorld;
@@ -26,6 +27,9 @@ public class WorldManager : MonoBehaviour
     private void Awake()
     {
         if (!Instance) Instance = this;
+        
+        TextSubtitle.text = "小子 我再重复一遍 我们玩弹珠讲究的就是公平，你只要弹进三个杯子口就算胜利了，明白了吗？";
+        Invoke("Disappear", 4f);
     }
 
     // Start is called before the first frame update
@@ -38,16 +42,27 @@ public class WorldManager : MonoBehaviour
     void Update()
     {
         //if velocity = 0 持续5秒 IsFantasyWorld = false;
-        if (this.GetComponent<Rigidbody>().velocity.magnitude == 0)
-            _stopTimeRecord = Time.time;
-        IsFantasyWorld = IsThinking();
+        if (PlayerController.Instance._rigidbody.velocity.magnitude <= 0.1)
+        {
+            IsFantasyWorld = false;
+                
+        }
+        else
+        {
+            IsFantasyWorld = true;
+        }
+            
+        
 
         if (CupCollectCount == 3)
             Win();
 
         CupSubtitle.text = "Cups: " + CupCollectCount;
     }
-
+    void Disappear()
+    {
+        DialogPicture.SetActive(false);
+    }
     public void Switch()
     {
         foreach (var switcher in m_Switchers)
@@ -64,7 +79,11 @@ public class WorldManager : MonoBehaviour
     {
         if (_stopTimeRecord != 0)
             if (Time.time - _stopTimeRecord > EnterFantasyWorldTime)
+            {
+                _stopTimeRecord = 0;
                 return false;
+            }
+
             else
                 return true;
         else

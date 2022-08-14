@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class TeacherStage2 : MonoBehaviour
 {
@@ -11,6 +12,8 @@ public class TeacherStage2 : MonoBehaviour
     public GameObject Student1, Student2, Student3;
     public float ShootWaitTime = 0;
 
+    public GameObject Dialog;
+    public Text SubtitleText;
 
     public List<GameObject> StudentList = new List<GameObject>();
     // Start is called before the first frame update
@@ -28,8 +31,12 @@ public class TeacherStage2 : MonoBehaviour
         {
             this.GetComponent<TeacherMove>().enabled = false;
             ShootWaitTime += Time.deltaTime;
-            if (ShootWaitTime % 10 == 0)
+            if (ShootWaitTime > 10)
+            {
+                ShootWaitTime = 0;
                 Shoot();
+            }
+                
         }
 
         
@@ -52,12 +59,19 @@ public class TeacherStage2 : MonoBehaviour
     {
         yield return new WaitForSeconds(10f);
         Stage3Start();
-        Destroy(this);
+        this.gameObject.SetActive(false);
     }
 
     private void Stage3Start()
     {
         PlayerController.Instance.transform.position = StageThreeStart.transform.position;
         PlayerController.Instance.JumpForce = 15;
+        SubtitleText.text = "老师走了！快去仓库找到他吧";
+        Invoke("Disappear", 3f);
+    }
+
+    void Disappear()
+    {
+        Dialog.SetActive(false);
     }
 }
