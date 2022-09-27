@@ -6,9 +6,8 @@ public class ShootToPlayer : MonoBehaviour
 {
     // Start is called before the first frame update
     public float MoveSpeed;
-    public TeacherStage2 TeacherStageTwo;
 
-    private bool _notBurst = true;
+    private Vector3 direction;
     void Start()
     {
         
@@ -18,33 +17,26 @@ public class ShootToPlayer : MonoBehaviour
     void Update()
     {
         float _distanceBetween = Vector3.Distance(transform.position, PlayerController.Instance.transform.position);
-        if(_distanceBetween > 20f){
+        if(_distanceBetween > 10f){
             Vector3 _playerPosition = PlayerController.Instance.transform.position;
             Vector3 _mePostion = transform.position;
-            var direction = (_playerPosition - _mePostion).normalized;
+            direction = (_playerPosition - _mePostion).normalized;
             Vector3 _moveDirection = direction * MoveSpeed * Time.deltaTime;
             this.transform.position += _moveDirection;
+            direction *= MoveSpeed; // elseÓï¾ä·þÎñ
         }
         else
         {
-            if (_notBurst)
-            {
-                _notBurst = false;
-                Burst();
-
-            }
-                
+            direction -= Vector3.down * -0.98f * Time.deltaTime;
+            Vector3 _moveDirection = direction * Time.deltaTime;
+            this.transform.position += _moveDirection;
         }
 
 
     }
     void Burst()
     {
-        Vector3 _playerPosition = PlayerController.Instance.transform.position;
-        Vector3 _mePostion = transform.position;
-        var direction = (_playerPosition - _mePostion).normalized;
-        Vector3 _moveDirection = direction * MoveSpeed * Time.deltaTime;
-        this.transform.position += _moveDirection*2;
+
     }
     private void OnCollisionEnter(Collision collision)
     {
@@ -55,11 +47,11 @@ public class ShootToPlayer : MonoBehaviour
         }
         else if(collision.collider.tag == "Student")
         {
-            TeacherStageTwo.StudentList.Remove(collision.collider.gameObject);
+            TeacherStage2.Instance.StudentList.Remove(collision.collider.gameObject);
             Destroy(collision.collider);
             
-            if (TeacherStageTwo.StudentList.Count == 0)
-                TeacherStageTwo.StudentDone();
+            if (TeacherStage2.Instance.StudentList.Count == 0)
+                TeacherStage2.Instance.StudentDone();
             gameObject.SetActive(false);
         }
         else

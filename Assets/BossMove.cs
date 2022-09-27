@@ -1,12 +1,17 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class BossMove : MonoBehaviour
 {
     public float Health = 100;
     public float ChaseSpeed = 5f;
     public float SpellWaitTime = 10f;
+    public float SpellTimer = 0;
+    public Text TextSubtitle;
+    public GameObject DialogPicture;
+    public GameObject Ground,EndPosition;
     public GameObject BossRound,FakeAttack,StageTwo;
 
     private bool _attack = false;
@@ -28,19 +33,32 @@ public class BossMove : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(_attack)
+        SpellTimer += Time.deltaTime;
+
+        if (SpellTimer > 10)
+        {
             if (Health > 15)
-                Invoke("BossAttack",SpellWaitTime);
+                Invoke("BossAttack", SpellWaitTime);
             else
-                Invoke("BossAttackFake", SpellWaitTime/2);
+                Invoke("BossAttackFake", SpellWaitTime / 2);
+
+            SpellTimer = 0;
+        }
+
 
 
         if(Health <= 0)
         {
-            WorldManager.Instance.CupCollectCount += 1;
+            WorldManager.Instance.CupCollectCount = 2;
+            Ground.tag = "Ground";
+            PlayerController.Instance.transform.position = EndPosition.transform.position;
             StageTwo.SetActive(true);
-            Destroy(gameObject);
+            ShowSubtitle();
+            
+            FakeAttack.SetActive(false);
             BossRound.SetActive(false);
+            this.gameObject.SetActive(false);
+
         }
 
     }
@@ -60,12 +78,18 @@ public class BossMove : MonoBehaviour
     {
         float _randomX = Random.Range(250f, 267f);
         float _randomZ = Random.Range(-213f, -230f);
-        Instantiate(FakeAttack, new Vector3(_randomX, this.transform.position.y, _randomZ), FakeAttack.transform.rotation);
+        FakeAttack.transform.position = new Vector3(_randomX, transform.position.y, _randomZ);
         BossAttack();
     }
 
-    private void OnCollisionEnter(Collision collision)
+    void ShowSubtitle()
     {
-        _attack = true;
+        TextSubtitle.text = "只剩最后一个茶杯了，从讲台那里跳过去吧";
+        Invoke("Disappear", 5f);
+    }
+
+    void Disappear()
+    {
+        DialogPicture.SetActive(false);
     }
 }

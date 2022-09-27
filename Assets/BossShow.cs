@@ -5,7 +5,7 @@ using UnityEngine;
 public class BossShow : MonoBehaviour
 {
     // Start is called before the first frame update
-    public GameObject BossPreFab;
+    public GameObject BossPreFab,Ground;
     void Start()
     {
         
@@ -21,7 +21,8 @@ public class BossShow : MonoBehaviour
     {
         if(collision.collider.name == "Player")
         {
-            Instantiate(BossPreFab, this.transform.position, BossPreFab.transform.rotation);
+            BossPreFab.SetActive(true);
+            Ground.tag = "Untagged";
             this.gameObject.SetActive(false);
         }
     }

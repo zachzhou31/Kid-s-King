@@ -16,7 +16,14 @@ public class TeacherStage2 : MonoBehaviour
     public Text SubtitleText;
 
     public List<GameObject> StudentList = new List<GameObject>();
+
+    public static TeacherStage2 Instance;
     // Start is called before the first frame update
+    private void Awake()
+    {
+        if (!Instance) Instance = this;
+    }
+
     void Start()
     {
         StudentList.Add(Student1);

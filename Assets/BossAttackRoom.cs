@@ -18,9 +18,9 @@ public class BossAttackRoom : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.name == "Boss")
+        if (other.tag == "Boss")
         {
-
+            other.gameObject.GetComponent<Rigidbody>().velocity = Vector3.zero;
             BossMove.Instance.Health -= 25;
             this.gameObject.SetActive(false);
         }

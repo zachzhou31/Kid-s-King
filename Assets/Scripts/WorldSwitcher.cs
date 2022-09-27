@@ -10,9 +10,11 @@ public class WorldSwitcher : MonoBehaviour
     void Start()
     {
         WorldManager.Instance.AddSwitcher(this);
-        StartCoroutine(ISwitch());
+        //StartCoroutine(ISwitch());
     }
 
+    //Update 里 判断（与角色的条件之类）
+    //
 
     public void Switch()
     {

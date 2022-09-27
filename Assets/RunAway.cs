@@ -64,7 +64,7 @@ public class RunAway : MonoBehaviour
             default:
                 TextSubtitle.text = "继续吧 还差俩个就能见到我咯";
                 Invoke("Disappear", 4f);
-                WorldManager.Instance.CupCollectCount += 1;
+                WorldManager.Instance.CupCollectCount = 1;
                 return Vector3.zero;
 
         };

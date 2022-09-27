@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class DestroyAndChange : MonoBehaviour
 {
+    public bool Collid = false;
     // Start is called before the first frame update
     public GameObject invisibleCup;
     void Start()
@@ -14,16 +15,22 @@ public class DestroyAndChange : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        if (Collid)
+            CollidHappen();
     }
 
     private void OnCollisionEnter(Collision collision)
     {
         if(collision.collider.name == "Player")
         {
-            if(invisibleCup != null)
-                invisibleCup.SetActive(true);
-            Destroy(gameObject);
+            CollidHappen();
         }
+    }
+
+    void CollidHappen()
+    {
+        if (invisibleCup != null)
+            invisibleCup.SetActive(true);
+        Destroy(gameObject);
     }
 }

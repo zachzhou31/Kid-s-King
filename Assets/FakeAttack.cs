@@ -4,9 +4,9 @@ using UnityEngine;
 
 public class FakeAttack : MonoBehaviour
 {
-    public float ChaseSpeed = 5f;
+    public float ChaseSpeed = 10f;
 
-    private bool _fakeAttack = false;
+    private float SpellTimer = 0;
     // Start is called before the first frame update
     void Start()
     {
@@ -16,18 +16,17 @@ public class FakeAttack : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        ChaseSpeed = BossMove.Instance.ChaseSpeed;
-        if (!_fakeAttack)
+        SpellTimer += Time.deltaTime;
+        if (SpellTimer > 15)
         {
             FAttack();
-            _fakeAttack = true;
+            SpellTimer = 0;
         }
+            
+ 
     }
 
-    private void OnCollisionEnter(Collision collision)
-    {
-        Destroy(this);
-    }
+
 
     void FAttack()
     {
@@ -35,7 +34,7 @@ public class FakeAttack : MonoBehaviour
         Vector3 _mePostion = transform.position;
         var direction = (_playerPosition - _mePostion).normalized;
 
-        this.GetComponent<Rigidbody>().AddForce(direction * ChaseSpeed, ForceMode.Impulse);
+        this.GetComponent<Rigidbody>().AddForce(direction * ChaseSpeed * 2, ForceMode.Impulse);
     }
 
 

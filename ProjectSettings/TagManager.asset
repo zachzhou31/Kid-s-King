@@ -8,6 +8,8 @@ TagManager:
   - Student
   - Cup
   - TallBuilding
+  - Carrier
+  - Boss
   layers:
   - Default
   - TransparentFX

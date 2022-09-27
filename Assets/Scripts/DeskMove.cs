@@ -8,6 +8,7 @@ public class DeskMove : MonoBehaviour
     public Vector3 FirstPoint, SecondPoint, ThirdPoint, FourthPoint, FifthPoint;
     public stage1_start StageStartStatus;
     public GameObject Teacher;
+    public Teacher2 TeacherTwoStatus;
     public float MoveDistance;
     public int MoveStep;
 
@@ -25,9 +26,9 @@ public class DeskMove : MonoBehaviour
 
             
 
-        if (StageStartStatus.Stage1Start)
+        if ((StageStartStatus.Stage1Start)&&(TeacherTwoStatus.TeacherChange2 == false))
         {
-            if ((Teacher.transform.position.z <= 45.2) && (Teacher.transform.position.x == -52))
+            if ((Teacher.transform.position.z <= 46.2) && (Teacher.transform.position.x == -52))
                 DeskBounceMove();
             else
             {
