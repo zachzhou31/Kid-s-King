@@ -14,7 +14,6 @@ public class BossMove : MonoBehaviour
     public GameObject Ground,EndPosition;
     public GameObject BossRound,FakeAttack,StageTwo;
 
-    private bool _attack = false;
 
     public static BossMove Instance;
     // Start is called before the first frame update
@@ -38,7 +37,11 @@ public class BossMove : MonoBehaviour
         if (SpellTimer > 10)
         {
             if (Health > 15)
+            {
+                this.transform.localScale = new Vector3(3, 3, 3);
                 Invoke("BossAttack", SpellWaitTime);
+            }
+                
             else
                 Invoke("BossAttackFake", SpellWaitTime / 2);
 
@@ -46,8 +49,9 @@ public class BossMove : MonoBehaviour
         }
 
 
+        this.transform.localScale = Vector3.Lerp(this.transform.localScale, new Vector3(1, 1, 1), 1f);
 
-        if(Health <= 0)
+        if (Health <= 0)
         {
             WorldManager.Instance.CupCollectCount = 2;
             Ground.tag = "Ground";
@@ -63,8 +67,10 @@ public class BossMove : MonoBehaviour
 
     }
 
+
     private void BossAttack()
     {
+        
         Vector3 _playerPosition = PlayerController.Instance.transform.position;
         Vector3 _mePostion = transform.position;
         var direction = (_playerPosition - _mePostion).normalized;
@@ -78,6 +84,7 @@ public class BossMove : MonoBehaviour
     {
         float _randomX = Random.Range(250f, 267f);
         float _randomZ = Random.Range(-213f, -230f);
+        FakeAttack.SetActive(true);
         FakeAttack.transform.position = new Vector3(_randomX, transform.position.y, _randomZ);
         BossAttack();
     }

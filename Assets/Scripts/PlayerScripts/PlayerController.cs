@@ -107,18 +107,19 @@ public class PlayerController : MonoBehaviour
     {
         if (collision.collider.tag == "Ground")
             Invoke("ResetPosition", 1f);
-        else if (collision.collider.tag == "Carrier")
-            this.transform.parent = collision.collider.transform;
-                
+        
+
+                       
     }
              
 
     
 
-    private void OnCollisionExit(Collision collision)
-    {
-        this.transform.parent = null;
-    }
+    //private void OnCollisionStay(Collision collision)
+    //{
+    //    if (collision.collider.tag == "Carrier")
+     //       _rigidbody.velocity += collision.collider.GetComponent<Rigidbody>().velocity;
+    //}
     void ResetPosition()
     {
         

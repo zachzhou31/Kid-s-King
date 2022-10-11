@@ -23,7 +23,6 @@ public class CameraDetectBuilding : MonoBehaviour
         if (Physics.Raycast(_cameraRay, out _cameraHit, Mathf.Infinity,LayerDetect))
         {
             TextSubtitle.text = "哦 古埃及建筑 最近美术课的主题是古埃及的冷兵器 冷兵器？哈哈 那当然还是坦克车更实在啦！！";
-            Debug.Log(_cameraHit.collider.name);
         }
     }
 }

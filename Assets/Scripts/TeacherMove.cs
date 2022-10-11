@@ -30,6 +30,7 @@ public class TeacherMove : MonoBehaviour
     {
         if (_moveToTrunP)
         {
+            _moveDistancePerDelta = 0.005f;
             this.transform.position = Vector3.MoveTowards(this.transform.position, TurnPoint, _moveDistancePerDelta);
             if (this.transform.position == TurnPoint)
             {
@@ -43,12 +44,14 @@ public class TeacherMove : MonoBehaviour
         {
             if (_moveToEndP)
             {
+                _moveDistancePerDelta = 0.005f;
                 this.transform.position = Vector3.MoveTowards(this.transform.position, EndPoint, _moveDistancePerDelta);
                 if (this.transform.position == EndPoint)
                     _moveToTrunP = true;
             }
             else
             {
+                _moveDistancePerDelta = 0.01f;
                 this.transform.position = Vector3.MoveTowards(this.transform.position, StartPoint, _moveDistancePerDelta);
                 if (this.transform.position == StartPoint)
                     _moveToTrunP = true;

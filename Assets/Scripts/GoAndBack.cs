@@ -23,6 +23,8 @@ public class GoAndBack : MonoBehaviour
         if (StageStartStatus.Stage1Start)
             if ((Teacher.transform.position.z <= 45.2) && (Teacher.transform.position.x == -52))
                 DeskBounceMove();
+
+
     }
 
     void DeskBounceMove()

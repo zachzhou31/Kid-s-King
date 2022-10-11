@@ -27,6 +27,7 @@ public class ShootToPlayer : MonoBehaviour
         }
         else
         {
+            this.GetComponent<Rigidbody>().isKinematic = false;
             direction -= Vector3.down * -0.98f * Time.deltaTime;
             Vector3 _moveDirection = direction * Time.deltaTime;
             this.transform.position += _moveDirection;
