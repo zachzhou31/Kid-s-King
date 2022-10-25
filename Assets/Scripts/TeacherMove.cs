@@ -9,8 +9,10 @@ public class TeacherMove : MonoBehaviour
     public Vector3 StartPoint, TurnPoint, EndPoint;
     public float _moveDistancePerDelta;
     public Text SubtitleText;
-    public GameObject Dialog;
-
+    public GameObject Dialog,DetectPoint;
+    public LayerMask LayerDetect;
+    public float RotationTime;
+    public float _direction = 1;
     bool _moveToTrunP = true;
     bool _moveToEndP = false;
     void Start()
@@ -23,9 +25,31 @@ public class TeacherMove : MonoBehaviour
     {
        AutoMove();
        IsPlayerMove();
+        DetectPlayer();
+
+        transform.rotation *= Quaternion.Euler(0, 20 * Time.deltaTime * _direction, 0);
+        if (RotationTime > 2.8f)
+        {
+            _direction = -_direction;
+            RotationTime = 0;
+        }
+
+        RotationTime += Time.deltaTime;
 
     }
 
+    void DetectPlayer()
+    {
+        RaycastHit hitInfo;
+        
+        if (Physics.Raycast(DetectPoint.transform.position, -transform.forward, out hitInfo, 10000,LayerDetect))
+        {
+            Debug.DrawLine(DetectPoint.transform.position, hitInfo.point, Color.red);
+            if (hitInfo.collider.name == "Player")
+                PlayerController.Instance.Exposure += 1;
+
+        }
+    }
     void AutoMove()
     {
         if (_moveToTrunP)

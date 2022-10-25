@@ -19,6 +19,7 @@ public class PlayerController : MonoBehaviour
     public float JumpForce = 5;
     public float JumpInputDurationMin = 1;
     public float JumpInputDurationMax = 3;
+    public Image JumpImage;
     public Vector3 SavePointPosition = new Vector3(-11f,0.6f,-11f);
     public Rigidbody _rigidbody;
     public Vector3 WindSpeed;
@@ -49,8 +50,13 @@ public class PlayerController : MonoBehaviour
     void Update()
     {
         TestExposure();
-        if (_rigidbody.velocity.magnitude < 0.1)
+        if (_rigidbody.velocity.magnitude < 0.2)
+        {
             IsJump = true;
+            JumpImage.color = Color.green;
+
+        }
+            
 
         ExposureSlider.value = Exposure;
     }
@@ -93,6 +99,7 @@ public class PlayerController : MonoBehaviour
                 _rigidbody.AddForce(direction * JumpForce * inputDuration, ForceMode.Impulse);
                 TextSubtitle.text = "Force is " + inputDuration + " now";
                 IsJump = false;
+                JumpImage.color = Color.red;
             }
         }
 
@@ -108,18 +115,18 @@ public class PlayerController : MonoBehaviour
         if (collision.collider.tag == "Ground")
             Invoke("ResetPosition", 1f);
         
-
                        
     }
              
 
     
 
-    //private void OnCollisionStay(Collision collision)
-    //{
-    //    if (collision.collider.tag == "Carrier")
-     //       _rigidbody.velocity += collision.collider.GetComponent<Rigidbody>().velocity;
-    //}
+    private void OnCollisionStay(Collision collision)
+    {
+        if (collision.collider.tag == "Carrier")
+            _rigidbody.AddForce(collision.collider.GetComponent<Rigidbody>().velocity);
+    }
+
     void ResetPosition()
     {
         

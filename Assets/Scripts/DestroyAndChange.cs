@@ -6,7 +6,7 @@ public class DestroyAndChange : MonoBehaviour
 {
     public bool Collid = false;
     // Start is called before the first frame update
-    public GameObject invisibleCup;
+    public GameObject invisibleCup,Ground;
     void Start()
     {
         
@@ -24,6 +24,8 @@ public class DestroyAndChange : MonoBehaviour
         if(collision.collider.name == "Player")
         {
             CollidHappen();
+
+            Ground.tag = "Untagged";
         }
     }
 

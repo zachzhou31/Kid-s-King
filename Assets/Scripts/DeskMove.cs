@@ -30,11 +30,7 @@ public class DeskMove : MonoBehaviour
         {
             if ((Teacher.transform.position.z <= 46.2) && (Teacher.transform.position.x == -52))
                 DeskBounceMove();
-            else
-            {
-                if (PlayerController.Instance._rigidbody.velocity.magnitude > 0.3f)
-                    PlayerController.Instance.Exposure += 1 * Time.deltaTime;
-            }
+            
         }
             
             

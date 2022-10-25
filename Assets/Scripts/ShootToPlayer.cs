@@ -27,10 +27,11 @@ public class ShootToPlayer : MonoBehaviour
         }
         else
         {
+
             this.GetComponent<Rigidbody>().isKinematic = false;
             direction -= Vector3.down * -0.98f * Time.deltaTime;
             Vector3 _moveDirection = direction * Time.deltaTime;
-            this.transform.position += _moveDirection;
+            this.GetComponent<Rigidbody>().AddForce(_moveDirection * 10f, ForceMode.Impulse);
         }
 
 
@@ -48,11 +49,10 @@ public class ShootToPlayer : MonoBehaviour
         }
         else if(collision.collider.tag == "Student")
         {
+            Debug.Log("Pengdaole");
             TeacherStage2.Instance.StudentList.Remove(collision.collider.gameObject);
-            Destroy(collision.collider);
-            
-            if (TeacherStage2.Instance.StudentList.Count == 0)
-                TeacherStage2.Instance.StudentDone();
+            collision.collider.gameObject.SetActive(false);
+
             gameObject.SetActive(false);
         }
         else

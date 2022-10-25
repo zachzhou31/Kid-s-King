@@ -45,9 +45,10 @@ public class TeacherStage2 : MonoBehaviour
             }
                 
         }
+        if (StudentList.Count == 0)
+            StudentDone();
 
-        
-            
+
 
     }
 

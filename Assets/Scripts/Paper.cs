@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Paper : MonoBehaviour
 {
+    private float _disappearTime;
     // Start is called before the first frame update
     void Start()
     {
@@ -17,6 +18,8 @@ public class Paper : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        _disappearTime += Time.deltaTime;
+        if (_disappearTime > 15f)
+            this.gameObject.SetActive(false);
     }
 }
