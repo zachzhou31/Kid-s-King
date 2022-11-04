@@ -9,6 +9,7 @@ public class GoAndBack : MonoBehaviour
     public float MoveSpeed;
     public stage1_start StageStartStatus;
 
+    public Vector3 _direction;
     bool _moveTo = true;
 
     // Start is called before the first frame update
@@ -31,8 +32,12 @@ public class GoAndBack : MonoBehaviour
     {
         if (_moveTo)
         {
-            this.transform.position = Vector3.MoveTowards(this.transform.position, EndPoint, MoveSpeed);
-            if (this.transform.position == EndPoint)
+            Vector3 _endPosition = EndPoint;
+            Vector3 _mePostion = transform.position;
+            _direction = (_endPosition - _mePostion).normalized;
+            this.GetComponent<Rigidbody>().MovePosition(transform.position+_direction*MoveSpeed*Time.deltaTime);
+            //this.transform.position = Vector3.MoveTowards(this.transform.position, EndPoint, MoveSpeed);
+            if (Vector3.Distance(this.transform.position, EndPoint)<1f)
             {
                 _moveTo = false;
             }
@@ -40,8 +45,12 @@ public class GoAndBack : MonoBehaviour
 
         else
         {
-            this.transform.position = Vector3.MoveTowards(this.transform.position, StartPoint, MoveSpeed);
-            if (this.transform.position == StartPoint)
+            Vector3 _endPosition = EndPoint;
+            Vector3 _mePostion = transform.position;
+            _direction = (_mePostion - _endPosition).normalized;
+            this.GetComponent<Rigidbody>().MovePosition(transform.position + _direction * MoveSpeed * Time.deltaTime);
+            //this.transform.position = Vector3.MoveTowards(this.transform.position, StartPoint, MoveSpeed);
+            if (Vector3.Distance(this.transform.position, StartPoint) < 1f)
             {
                 _moveTo = true;
             }

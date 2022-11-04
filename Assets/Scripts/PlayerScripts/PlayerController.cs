@@ -23,6 +23,7 @@ public class PlayerController : MonoBehaviour
     public Vector3 SavePointPosition = new Vector3(-11f,0.6f,-11f);
     public Rigidbody _rigidbody;
     public Vector3 WindSpeed;
+    public float ForceEnhance;
     public bool IsJump = false;
     [Header("Data")]
     public Vector2 CameraInput = Vector2.zero;
@@ -124,7 +125,12 @@ public class PlayerController : MonoBehaviour
     private void OnCollisionStay(Collision collision)
     {
         if (collision.collider.tag == "Carrier")
-            _rigidbody.AddForce(collision.collider.GetComponent<Rigidbody>().velocity);
+        {
+            this.GetComponent<Rigidbody>().MovePosition(transform.position + collision.collider.GetComponent<GoAndBack>()._direction * (collision.collider.GetComponent<GoAndBack>().MoveSpeed/4) * Time.deltaTime);
+            //_rigidbody.AddForce(collision.collider.GetComponent<Rigidbody>().velocity * 10);
+            //transform.position = Vector3.MoveTowards(transform.position, collision.collider.transform.position, 5f);
+        }
+            
     }
 
     void ResetPosition()
