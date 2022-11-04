@@ -9,17 +9,41 @@ public class RunAway : MonoBehaviour
     // Start is called before the first frame update
     private int _index = 0;
     private Vector3 _nextPosition;
+    private Vector3 _startPosition;
+    private Vector3 _mePosition;
+    private bool _meUp = true;
     public Text TextSubtitle;
     public GameObject DialogPicture;
+
+    public static RunAway Instance;
+    private void Awake()
+    {
+        if (!Instance) Instance = this;
+    }
+
     void Start()
     {
-        
+        _startPosition = transform.position;
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+        transform.rotation *= Quaternion.Euler(0, 20 * Time.deltaTime, 0);
+        if (_meUp)
+        {
+            _mePosition = new Vector3(_startPosition.x, _startPosition.y +.5f, _startPosition.z);
+            transform.position = Vector3.MoveTowards(transform.position, _mePosition, 0.005f);
+            
+            if(transform.position.y >= _mePosition.y)
+                _meUp = false;
+        }
+        else
+        {
+            transform.position = Vector3.MoveTowards(transform.position, _startPosition, 0.005f);
+            if (transform.position.y <= _startPosition.y)
+                _meUp = true;
+        }
     }
 
     private void OnCollisionEnter(Collision collision)
@@ -74,5 +98,6 @@ public class RunAway : MonoBehaviour
     private void CupRun()
     {
         this.transform.position = _nextPosition;
+        _startPosition = _nextPosition;
     }
 }
