@@ -25,6 +25,7 @@ public class PlayerController : MonoBehaviour
     public Vector3 WindSpeed;
     public float ForceEnhance;
     public bool IsJump = false;
+    public GameObject Teacher;
     [Header("Data")]
     public Vector2 CameraInput = Vector2.zero;
 
@@ -126,11 +127,21 @@ public class PlayerController : MonoBehaviour
     {
         if (collision.collider.tag == "Carrier")
         {
-            this.GetComponent<Rigidbody>().MovePosition(transform.position + collision.collider.GetComponent<GoAndBack>()._direction * (collision.collider.GetComponent<GoAndBack>().MoveSpeed/4) * Time.deltaTime);
+            if ((Teacher.transform.position.z <= 46.2) && (Teacher.transform.position.x == -52))
+                this.GetComponent<Rigidbody>().MovePosition(transform.position + collision.collider.GetComponent<GoAndBack>()._direction * (collision.collider.GetComponent<GoAndBack>().MoveSpeed/4.5f) * Time.deltaTime);
             //_rigidbody.AddForce(collision.collider.GetComponent<Rigidbody>().velocity * 10);
             //transform.position = Vector3.MoveTowards(transform.position, collision.collider.transform.position, 5f);
         }
-            
+        if (collision.collider.tag == "CarrierParent")
+        {
+            transform.parent = collision.collider.transform;
+            //_rigidbody.velocity = Vector3.zero;
+        }
+    }
+
+    private void OnCollisionExit(Collision collision)
+    {
+        transform.parent = GameObject.Find("Player/PlayerWithCamera").transform;
     }
 
     void ResetPosition()

@@ -57,10 +57,6 @@ public class RunAway : MonoBehaviour
                 TextSubtitle.text = "事不过三 事不过三";
                 Invoke("Disappear", 4f);
                 return Point4.transform.position;
-            case 4:
-                TextSubtitle.text = "这么轻易就让你收集到第一个茶杯了？啧";
-                Invoke("Disappear", 4f);
-                return Point5.transform.position;
             default:
                 TextSubtitle.text = "继续吧 还差俩个就能见到我咯";
                 Invoke("Disappear", 4f);

@@ -10,6 +10,7 @@ TagManager:
   - TallBuilding
   - Carrier
   - Boss
+  - CarrierParent
   layers:
   - Default
   - TransparentFX

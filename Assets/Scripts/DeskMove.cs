@@ -44,11 +44,16 @@ public class DeskMove : MonoBehaviour
 
     void DeskBounceMove()
     {
+        
 
         switch (MoveStep)
         {
             case 1:
                 this.transform.position = Vector3.MoveTowards(this.transform.position, SecondPoint, MoveDistance);
+
+
+
+
                 break;
             case 2:
                 this.transform.position = Vector3.MoveTowards(this.transform.position, ThirdPoint, MoveDistance);
