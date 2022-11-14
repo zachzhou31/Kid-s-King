@@ -29,6 +29,7 @@ public class DestroyAndChange : MonoBehaviour
         }
     }
 
+    [ContextMenu("Test Collide")]
     void CollidHappen()
     {
         if (invisibleCup != null)

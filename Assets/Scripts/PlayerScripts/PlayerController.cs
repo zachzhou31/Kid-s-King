@@ -128,9 +128,10 @@ public class PlayerController : MonoBehaviour
         if (collision.collider.tag == "Carrier")
         {
             if ((Teacher.transform.position.z <= 46.2) && (Teacher.transform.position.x == -52))
-                this.GetComponent<Rigidbody>().MovePosition(transform.position + collision.collider.GetComponent<GoAndBack>()._direction * (collision.collider.GetComponent<GoAndBack>().MoveSpeed/4.5f) * Time.deltaTime);
-            //_rigidbody.AddForce(collision.collider.GetComponent<Rigidbody>().velocity * 10);
-            //transform.position = Vector3.MoveTowards(transform.position, collision.collider.transform.position, 5f);
+                //_rigidbody.AddForce(collision.collider.GetComponent<Rigidbody>().velocity);
+                this.GetComponent<Rigidbody>().MovePosition(transform.position + collision.collider.GetComponent<GoAndBack>()._direction * (collision.collider.GetComponent<GoAndBack>().MoveSpeed/4.5f) * Time.fixedDeltaTime);
+                //_rigidbody.AddForce(collision.collider.GetComponent<Rigidbody>().velocity * 10);
+                //transform.position = Vector3.MoveTowards(transform.position, collision.collider.transform.position, 5f);
         }
         if (collision.collider.tag == "CarrierParent")
         {
