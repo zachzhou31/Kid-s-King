@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 356440980615749588}
   - component: {fileID: 5764242652431356490}
   m_Layer: 0
-  m_Name: SM_Prop_Cardboard_Building_03
+  m_Name: BossAttackRoom
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

@@ -13,7 +13,7 @@ public class PlayerController : MonoBehaviour
     public Text TextSubtitle;
 
     public Slider ExposureSlider;
-
+    public Slider JumpSlider;
     [Header("Configs")]
     public float Exposure = 0;
     public float JumpForce = 5;
@@ -58,8 +58,14 @@ public class PlayerController : MonoBehaviour
             JumpImage.color = Color.green;
 
         }
-            
-
+        if(Input.GetKeyDown(KeyCode.Space) && IsJump)
+        {
+            JumpSlider.value = 0f;
+        }   
+        if(Input.GetKey(KeyCode.Space) && IsJump)
+        {
+            JumpSlider.value += (100 / 2.5f) * Time.deltaTime;
+        }
         ExposureSlider.value = Exposure;
     }
 
@@ -90,7 +96,7 @@ public class PlayerController : MonoBehaviour
                 if (_jumpInputTime == 0)
                     inputDuration = 1;
                 else
-                    inputDuration = Mathf.Clamp(Time.time - _jumpInputTime, JumpInputDurationMin, JumpInputDurationMax);
+                    inputDuration = 1+ Mathf.Clamp(Time.time - _jumpInputTime, 0, JumpInputDurationMax);
 
                 
 
