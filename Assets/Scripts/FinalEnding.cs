@@ -41,7 +41,7 @@ public class FinalEnding : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.name == "Player")
+        if (other.name == "PlayerBall")
         {
             IsEnd = true;
             End();

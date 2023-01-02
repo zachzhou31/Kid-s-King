@@ -26,7 +26,7 @@ public class Stage2Start : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        if(collision.collider.name == "Player")
+        if(collision.collider.name == "PlayerBall")
         {
             StageTwoStart = true;
         }

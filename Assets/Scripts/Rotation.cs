@@ -31,7 +31,7 @@ public class Rotation : MonoBehaviour
         if(Physics.Raycast(transform.position,transform.right,out hitInfo,10000, SightMask))
         {
             Debug.Log(hitInfo.collider.name);
-            if(hitInfo.collider.name == "Player")
+            if(hitInfo.collider.name == "PlayerBall")
                 Player.GetComponent<PlayerController>().Exposure += 1;
             
         }

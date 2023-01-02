@@ -18,7 +18,7 @@ public class LastStageStart : MonoBehaviour
     }
     private void OnTriggerEnter(Collider other)
     {
-        if (other.name == "Player")
+        if (other.name == "PlayerBall")
             PlayerController.Instance.JumpForce = _jumpForceOrigin;
     }
 }

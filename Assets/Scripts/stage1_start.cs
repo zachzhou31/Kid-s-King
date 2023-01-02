@@ -20,7 +20,7 @@ public class stage1_start : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if(other.name == "Player")
+        if(other.name == "PlayerBall")
         {
             Stage1Start = true;
             Invoke("StudentShowUp", 5f);

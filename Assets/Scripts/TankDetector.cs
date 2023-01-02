@@ -20,7 +20,7 @@ public class TankDetector : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.name == "Player")
+        if (other.name == "PlayerBall")
             Tank.GetComponent<Rigidbody>().AddForce(Vector3.forward * Force);
 
     }

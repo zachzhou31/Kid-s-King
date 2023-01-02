@@ -19,7 +19,7 @@ public class BossShow : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        if(collision.collider.name == "Player")
+        if(collision.collider.name == "PlayerBall")
         {
             BossPreFab.SetActive(true);
             this.gameObject.SetActive(false);

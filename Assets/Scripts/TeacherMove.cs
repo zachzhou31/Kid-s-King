@@ -45,7 +45,7 @@ public class TeacherMove : MonoBehaviour
         if (Physics.Raycast(DetectPoint.transform.position, -transform.forward, out hitInfo, 10000,LayerDetect))
         {
             Debug.DrawLine(DetectPoint.transform.position, hitInfo.point, Color.red);
-            if (hitInfo.collider.name == "Player")
+            if (hitInfo.collider.name == "PlayerBall")
                 PlayerController.Instance.Exposure += 1;
 
         }

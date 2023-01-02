@@ -29,7 +29,7 @@ public class WindZone : MonoBehaviour
     {
        //if(! WindZoneList.Instance.WindZoneLists.Contains(this.GetComponent<WindZone>()))
        //     WindZoneList.Instance.WindZoneLists.Add(this.GetComponent<WindZone>());
-       if(other.name == "Player")
+       if(other.name == "PlayerBall")
         {
             if (!WindZoneList.Instance.WindZoneLists.Contains(this))
             {

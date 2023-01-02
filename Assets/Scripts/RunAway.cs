@@ -48,7 +48,7 @@ public class RunAway : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        if(collision.collider.name == "Player")
+        if(collision.collider.name == "PlayerBall")
         {
             _nextPosition = this.nextPosition(_index);
             if (_nextPosition != Vector3.zero)
